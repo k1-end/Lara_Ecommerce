@@ -19,5 +19,5 @@ use App\Http\Controllers\ProductController;
 Route::get('/', [ProductController::class , 'index'])->name('home');
 Route::get('/login', [UserController::class, 'login_page'])->middleware(App\Http\Middleware\LoginRedirect::class)->name('login');
 Route::post('/login', [UserController::class, 'auth_user']);
-Route::get('/signup', [UserController::class, 'signup_page']);
+Route::get('/signup', [UserController::class, 'signup_page'])->name('signup');
 Route::post('/signup', [UserController::class, 'signup']);

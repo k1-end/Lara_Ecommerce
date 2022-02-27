@@ -16,11 +16,17 @@
         <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
           <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
         </form>
-
+        @if(!auth()->check())
         <div class="text-end">
           <a href="{{route('login')}}" type="button" class="btn btn-outline-light me-2">Login</a>
-          <button type="button" class="btn btn-warning">Sign-up</button>
+          <a href="{{route('signup')}}" class="btn btn-warning">Sign-up</a>
         </div>
+        @endif
+        @auth
+        <div class="text-end">
+          <a href="#" type="button" class="btn btn-warning  me-2">Logout</a>
+        </div>
+        @endauth
       </div>
     </div>
   </header>

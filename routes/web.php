@@ -23,3 +23,9 @@ Route::get('/signup', [UserController::class, 'signup_page'])->name('signup');
 Route::post('/signup', [UserController::class, 'signup']);
 
 Route::get('/product/{product}' , [ProductController::class , 'show'])->name('product');
+Route::get('/add_to_cart/{product}' , [ProductController::class , 'add_to_cart'])->name('add_to_cart')->middleware('auth');
+
+
+
+
+

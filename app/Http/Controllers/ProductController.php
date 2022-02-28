@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -85,5 +86,14 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         //
+    }
+
+    public function add_to_cart(Product $product)
+    {
+        $cart = new \App\Models\Cart;
+        $cart->user_id = Auth::id();
+        $cart->product_id = $product->id;
+        $cart->save();
+        return redirect()->route('product' , ['product' => $product]);
     }
 }

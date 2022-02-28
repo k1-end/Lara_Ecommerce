@@ -21,3 +21,5 @@ Route::get('/login', [UserController::class, 'login_page'])->middleware(App\Http
 Route::post('/login', [UserController::class, 'auth_user']);
 Route::get('/signup', [UserController::class, 'signup_page'])->name('signup');
 Route::post('/signup', [UserController::class, 'signup']);
+
+Route::get('/product/{product}' , [ProductController::class , 'show'])->name('product');

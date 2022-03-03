@@ -24,7 +24,7 @@
         @endif
         @auth
         <div class="text-end">
-          <a href="#" class="btn btn-warning  me-2">Cart({{\App\Models\Cart::where('user_id' , auth()->id())->count()}})</a>
+          <a href="{{route('cart')}}" class="btn btn-warning  me-2">Cart({{\App\Models\Cart::where('user_id' , auth()->id())->count()}})</a>
         </div>
         <div class="text-end">
           <a href="#" class="btn btn-warning  me-2">Logout</a>

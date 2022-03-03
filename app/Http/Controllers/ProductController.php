@@ -1,10 +1,11 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Cart;
+use App\Models\User;
 
 class ProductController extends Controller
 {
@@ -90,10 +91,25 @@ class ProductController extends Controller
 
     public function add_to_cart(Product $product)
     {
-        $cart = new \App\Models\Cart;
-        $cart->user_id = Auth::id();
-        $cart->product_id = $product->id;
+        $cart = Cart::firstOrNew(
+            [
+                'user_id' => Auth::id(),
+                'product_id' => $product->id
+            ] , [
+                'order_id' => null,
+                'quantity' => 0
+            ]);
+        
+        
+        $cart->quantity += 1;
+        
         $cart->save();
+        
         return redirect()->route('product' , ['product' => $product]);
+    }
+    
+    function cart_page(Request $request) {
+        $carts = Cart::where('user_id' , auth()->id())->get();
+        return view('cart')->with('carts' , $carts);
     }
 }

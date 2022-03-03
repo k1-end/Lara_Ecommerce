@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\OrderController;
  
 
 /*
@@ -24,7 +25,10 @@ Route::post('/signup', [UserController::class, 'signup']);
 
 Route::get('/product/{product}' , [ProductController::class , 'show'])->name('product');
 Route::get('/add_to_cart/{product}' , [ProductController::class , 'add_to_cart'])->name('add_to_cart')->middleware('auth');
+Route::get('cart', [ProductController::class , 'cart_page'])->name('cart');
 
+
+Route::get('/order' , [OrderController::class , 'order_page'])->name('order');
 
 
 

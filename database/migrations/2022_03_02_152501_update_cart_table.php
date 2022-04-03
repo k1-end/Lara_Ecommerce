@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::table('cart', function (Blueprint $table) {
             $table->integer('order_id')->nullable();
             $table->integer('quantity');
-            
+            $table->softDeletes();
         });
     }
 

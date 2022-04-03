@@ -29,6 +29,12 @@ Route::get('cart', [ProductController::class , 'cart_page'])->name('cart');
 
 
 Route::get('/order' , [OrderController::class , 'order_page'])->name('order');
+Route::get('/checkout', [OrderController::class, 'checkout']);
+
+Route::get('/dummy_payment' , [OrderController::class , 'dummy_payment'])->name('dummy_payment');
+Route::get('/successful_payment' , [OrderController::class , 'successful_payment'])->name('successful_payment');
+Route::post('/callback', [OrderController::class, 'callback'])->name('callback');
+
 
 
 

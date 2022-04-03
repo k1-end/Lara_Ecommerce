@@ -20,13 +20,13 @@ return new class extends Migration
             $table->integer('amount');
             $table->integer('status');
             $table->boolean('test');
-            $table->string('response_id');
-            $table->string('response_link');
-            $table->string('response_error_code');
-            $table->string('response_error_msg');
-            $table->string('track_id');
-            $table->string('card_no');
-            $table->date('date');
+            $table->string('response_id')->nullable();
+            $table->string('response_link')->nullable();
+            $table->string('response_error_code')->nullable();
+            $table->string('response_error_msg')->nullable();
+            $table->string('track_id')->nullable();
+            $table->string('card_no')->nullable();
+            $table->date('date')->nullable();
             $table->string('shipping_addr');
             
         });

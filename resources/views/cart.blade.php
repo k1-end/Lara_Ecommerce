@@ -11,5 +11,5 @@
             </li>
         @endforeach
     </ul>
-  	<a class="btn btn-primary" href="">Checkout</a>
+  	<a class="btn btn-primary" href="{{route('order')}}">Checkout</a>
 @endsection

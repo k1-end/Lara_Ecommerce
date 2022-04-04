@@ -38,6 +38,6 @@ Route::post('/callback', [OrderController::class, 'callback'])->name('callback')
 
 
 
-Route::get('/dashboard' , [DashboardController::class , 'index']);
+Route::get('/dashboard' , [DashboardController::class , 'index'])->middleware(App\Http\Middleware\OnlyAdmin::class);
 
 

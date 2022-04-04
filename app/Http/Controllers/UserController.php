@@ -48,4 +48,14 @@ class UserController extends Controller
         $user->save();
         return redirect()->route('home');
     }
+
+    public function index(Request $request)
+    {
+        return view('dashboard.users')->with('users' , User::all());
+    }
+
+    public function show(User $user)
+    {
+        return view('dashboard.user')->with('user' , $user);
+    }
 }

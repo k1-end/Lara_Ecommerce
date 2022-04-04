@@ -39,5 +39,7 @@ Route::post('/callback', [OrderController::class, 'callback'])->name('callback')
 
 
 Route::get('/dashboard' , [DashboardController::class , 'index'])->middleware(App\Http\Middleware\OnlyAdmin::class);
+Route::get('/dashboard/users' , [UserController::class , 'index'])->middleware(App\Http\Middleware\OnlyAdmin::class);
+Route::get('/dashboard/{user}' , [UserController::class , 'show'])->middleware(App\Http\Middleware\OnlyAdmin::class);
 
 

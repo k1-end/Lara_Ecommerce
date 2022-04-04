@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\DashboardController;
  
 
 /*
@@ -37,5 +38,6 @@ Route::post('/callback', [OrderController::class, 'callback'])->name('callback')
 
 
 
+Route::get('/dashboard' , [DashboardController::class , 'index']);
 
 

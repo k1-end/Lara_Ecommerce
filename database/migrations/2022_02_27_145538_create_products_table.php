@@ -22,7 +22,7 @@ return new class extends Migration
 	    $table->string('category');
 	    $table->string('price');
 	    $table->string('thumbnail');
-	    
+	    $table->softDeletes();
         });
     }
 

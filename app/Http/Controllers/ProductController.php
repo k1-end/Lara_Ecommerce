@@ -17,6 +17,9 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::all();
+        if (auth()->check() && auth()->user()->hasPermissionTo('EditProducts')) {
+            return view('dashboard.products')->with('products' , $products);
+        }
         return view('home')->with('products' , $products);
     }
 
@@ -27,7 +30,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.new_product');
     }
 
     /**
@@ -38,7 +41,22 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'category' => ['required'],
+            'brand' => ['required' ],
+            'price' => ['required' ],
+            'desc' => ['required' ],
+            'name' =>['required' , 'unique:products']
+        ]);
+        $product = new Product();
+        $product->name = $request->name;
+        $product->desc = $request->desc;
+        $product->price = $request->price;
+        $product->brand = $request->brand;
+        $product->category = $request->category;
+        $product->thumbnail = '';
+        $product->save();
+        return redirect('/dashboard/products');
     }
 
     /**
@@ -49,10 +67,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        //return $product;
-        //$product = Product::where(['id' , $id]);
         return view('product')->with('product' , $product);
-        //return 'hi';
     }
 
     /**
@@ -63,7 +78,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        return view ('dashboard.product')->with('product' , $product);
     }
 
     /**
@@ -75,7 +90,20 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        $request->validate([
+            'category' => ['required'],
+            'brand' => ['required' ],
+            'price' => ['required' ],
+            'desc' => ['required' ],
+            'name' =>['required' , 'unique:products']
+        ]);
+        $product->name = $request->name;
+        $product->desc = $request->desc;
+        $product->price = $request->price;
+        $product->brand = $request->brand;
+        $product->category = $request->category;
+        $product->save();
+        return redirect('/dashboard/products');
     }
 
     /**
@@ -86,7 +114,8 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        $product->delete();
+        return redirect('/dashboard/products');
     }
 
     public function add_to_cart(Product $product)

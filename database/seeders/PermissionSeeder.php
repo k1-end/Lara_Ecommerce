@@ -26,5 +26,10 @@ class PermissionSeeder extends Seeder
         $customer = Role::create(['name' => 'customer']);
         $admin->givePermissionTo('EditProducts');
         $admin->givePermissionTo('EditUsers');
+        $user = \App\Models\User::factory()->unverified()->create([
+            'name' => 'admin',
+            'email' => 'admin@admin.com'
+        ]);
+        $user->assignRole($admin);
     }
 }

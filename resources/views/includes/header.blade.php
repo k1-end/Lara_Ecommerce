@@ -6,10 +6,10 @@
         </a>
 
         <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-          <li><a href="#" class="nav-link px-2 text-secondary">Home</a></li>
-          <li><a href="#" class="nav-link px-2 text-white">Features</a></li>
-          <li><a href="#" class="nav-link px-2 text-white">Pricing</a></li>
-          <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
+          <li><a href="{{route('home')}}" class="nav-link px-2 text-secondary">Home</a></li>
+          @if(auth()->check() && auth()->user()->getRoleNames()->contains('admin'))
+          <li><a href="{{url('/dashboard')}}" class="nav-link px-2 text-white">Dashboard</a></li>
+          @endif
           <li><a href="#" class="nav-link px-2 text-white">About</a></li>
         </ul>
 
@@ -23,9 +23,11 @@
         </div>
         @endif
         @auth
+        @if (! auth()->user()->getRoleNames()->contains('admin'))
         <div class="text-end">
           <a href="{{route('cart')}}" class="btn btn-warning  me-2">Cart({{\App\Models\Cart::where('user_id' , auth()->id())->count()}})</a>
-        </div>
+        </div>    
+        @endif
         <div class="text-end">
           <a href="#" class="btn btn-warning  me-2">Logout</a>
         </div>

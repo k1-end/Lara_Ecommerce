@@ -95,7 +95,7 @@ class ProductController extends Controller
             'brand' => ['required' ],
             'price' => ['required' ],
             'desc' => ['required' ],
-            'name' =>['required' , 'unique:products']
+            'name' =>['required']
         ]);
         $product->name = $request->name;
         $product->desc = $request->desc;

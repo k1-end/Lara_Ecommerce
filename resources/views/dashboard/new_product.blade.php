@@ -3,15 +3,6 @@
 @section('content')
     <form action="{{url('/dashboard/products/new')}}" method="post">
         @csrf
-        @if ($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
         <div class="form-floating">
             <input type="text" class="form-control"  name="name" id="name" >
             <label for="name">Name</label>

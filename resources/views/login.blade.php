@@ -14,18 +14,6 @@ Login
     }
 </style>
 <form action="/login" method="POST" class="login_form">
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                  <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
-    <!-- @error('email')
-        <div class="alert alert-danger">{{ $message }}</div>
-    @enderror -->
     @csrf
     <h1 class="h3 mb-3 fw-normal">Please Log in</h1>
     <div class="form-floating">

@@ -137,8 +137,20 @@ class ProductController extends Controller
         return redirect()->route('product' , ['product' => $product]);
     }
     
-    function cart_page(Request $request) {
+    function cart_page(Request $request) 
+    {
         $carts = Cart::where('user_id' , auth()->id())->get();
         return view('cart')->with('carts' , $carts);
+    }
+
+    public function search(Request $request)
+    {
+        // return $request->input('query');
+        $products = Product::where('name' , 'like' , '%'.$request->input('query'). '%')->select('name' , 'id')->get();
+        //return $products;
+        return view('search')->with([
+            'products' => $products , 
+            'query' => $request->input('query')
+        ]);
     }
 }

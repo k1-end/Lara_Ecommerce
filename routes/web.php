@@ -51,5 +51,6 @@ Route::get('/dashboard/users' , [UserController::class , 'index'])->middleware(A
 Route::get('/dashboard/{user}' , [UserController::class , 'show'])->middleware(App\Http\Middleware\OnlyAdmin::class);
 
 
+Route::get('search/' , [ProductController::class , 'search'])->name('search');
 
 

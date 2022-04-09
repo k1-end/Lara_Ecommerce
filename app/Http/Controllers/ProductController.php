@@ -16,7 +16,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
+        $products = Product::simplePaginate(15);
         if (auth()->check() && auth()->user()->hasPermissionTo('EditProducts')) {
             return view('dashboard.products')->with('products' , $products);
         }

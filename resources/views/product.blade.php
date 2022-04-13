@@ -5,6 +5,7 @@
 @section('content')
 
 <div class="card">
+    <img src="{{Storage::url($product->thumbnail)}}" alt="" width="500">
     <a href="{{route('product',['product' => $product])}}">{{$product->name}}</a>
     <p>{{$product->desc}}</p>
     <p>{{$product->price}}</p>

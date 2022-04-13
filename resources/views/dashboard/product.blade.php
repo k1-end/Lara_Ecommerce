@@ -3,6 +3,7 @@
 @section('content')
     <form action="{{url("product/edit/$product->id")}}" method="post">
         @csrf
+        <img src="{{Storage::url($product->thumbnail)}}" alt="" width="500">
         <div class="form-floating">
             <input type="text" class="form-control"  name="name" id="name" value="{{$product->name}}">
             <label for="name">Name</label>

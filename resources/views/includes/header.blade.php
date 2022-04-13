@@ -30,7 +30,7 @@
         </div>    
         @endif
         <div class="text-end">
-          <a href="#" class="btn btn-warning  me-2">Logout</a>
+          <a href="{{route('logout')}}" class="btn btn-warning  me-2">Logout</a>
         </div>
         @endauth
       </div>

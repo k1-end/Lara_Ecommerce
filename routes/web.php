@@ -23,6 +23,7 @@ Route::get('/login', [UserController::class, 'login_page'])->middleware(App\Http
 Route::post('/login', [UserController::class, 'auth_user']);
 Route::get('/signup', [UserController::class, 'signup_page'])->name('signup');
 Route::post('/signup', [UserController::class, 'signup']);
+Route::get('/logout', [UserController::class, 'logout'])->name('logout');
 
 Route::get('/product/{product}' , [ProductController::class , 'show'])->name('product');
 Route::get('/add_to_cart/{product}' , [ProductController::class , 'add_to_cart'])->name('add_to_cart')->middleware('auth');

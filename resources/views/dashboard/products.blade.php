@@ -8,5 +8,6 @@
             <li><a href="{{url('dashboard/products/'.$product->id)}}">{{$product->category}} - {{$product->name}}</a></li>
         @endforeach
     </ol>
+    {{$products->links()}}
     @endif
 @endsection

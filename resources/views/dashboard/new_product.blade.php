@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-    <form action="{{url('/dashboard/products/new')}}" method="post">
+    <form action="{{url('/dashboard/products/new')}}" method="post" enctype="multipart/form-data" >
         @csrf
         <div class="form-floating">
             <input type="text" class="form-control"  name="name" id="name" >
@@ -22,6 +22,10 @@
         <div class="form-floating">
             <textarea  class="form-control"  name="desc" id="desc" rows="10"></textarea>
             <label for="desc">Description</label>
+        </div>
+        <div class="form-floating">
+            <input type="file" class="form-control"  name="thumbnail" id="thumbnail" >
+            <label for="thumbnail">Thumbnail</label>
         </div>
         <button class="w-100 btn btn-lg btn-primary" type="submit">Create</button>
     </form>

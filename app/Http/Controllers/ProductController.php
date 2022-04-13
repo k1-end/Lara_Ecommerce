@@ -46,7 +46,8 @@ class ProductController extends Controller
             'brand' => ['required' ],
             'price' => ['required' ],
             'desc' => ['required' ],
-            'name' =>['required' , 'unique:products']
+            'name' => ['required' , 'unique:products'],
+            'thumbnail' => 'required|mimes:png,jpg,jpeg|max:2048'
         ]);
         $product = new Product();
         $product->name = $request->name;
@@ -54,7 +55,7 @@ class ProductController extends Controller
         $product->price = $request->price;
         $product->brand = $request->brand;
         $product->category = $request->category;
-        $product->thumbnail = '';
+        $product->thumbnail = $request->file('thumbnail')->store('public/photos');
         $product->save();
         return redirect('/dashboard/products');
     }

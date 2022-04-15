@@ -63,6 +63,7 @@ class OrderController extends Controller
         $order->date = date("Y-m-d");
         $order->save();
         foreach ($user_cart as $cart ) {
+            $this->authorize('update', $cart);
             $cart->order_id = $order->id;
             $cart->save();
         }
@@ -70,7 +71,6 @@ class OrderController extends Controller
         $order->response_link = $response['link'];
         $order->response_id = $response['id'];
         // TODO: set date according to the api response
-        
         
         $order->save();
         return redirect($order->response_link);
@@ -130,6 +130,7 @@ class OrderController extends Controller
     {
         $carts = Cart::where('order_id' , $order_id)->get();
         foreach ($carts as $cart ) {
+            auth()->user()->can('delete' , $cart);
             $cart->delete();
         }
     }

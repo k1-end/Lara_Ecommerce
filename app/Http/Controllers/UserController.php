@@ -51,11 +51,17 @@ class UserController extends Controller
 
     public function index(Request $request)
     {
+        if (!auth()->user()->hasRole('admin')) {
+            abort(403);
+        }
         return view('dashboard.users')->with('users' , User::all());
     }
 
     public function show(User $user)
     {
+        if (!auth()->user()->hasRole('admin')) {
+            abort(403);
+        }
         return view('dashboard.user')->with('user' , $user);
     }
 

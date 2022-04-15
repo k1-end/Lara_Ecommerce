@@ -30,6 +30,7 @@ class ProductController extends Controller
      */
     public function create()
     {
+        $this->authorize('create' , Product::class);
         return view('dashboard.new_product');
     }
 
@@ -41,6 +42,7 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create' , Product::class);
         $request->validate([
             'category' => ['required'],
             'brand' => ['required' ],
@@ -79,6 +81,7 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
+        $this->authorize('update', $product);
         return view ('dashboard.product')->with('product' , $product);
     }
 
@@ -91,6 +94,7 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
+        $this->authorize('update', $product);
         $request->validate([
             'category' => ['required'],
             'brand' => ['required' ],
@@ -115,6 +119,7 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
+        $this->authorize('delete', $product);
         $product->delete();
         return redirect('/dashboard/products');
     }
@@ -129,8 +134,7 @@ class ProductController extends Controller
                 'order_id' => null,
                 'quantity' => 0
             ]);
-        
-        
+        $this->authorize('update', $cart);
         $cart->quantity += 1;
         
         $cart->save();
@@ -146,9 +150,7 @@ class ProductController extends Controller
 
     public function search(Request $request)
     {
-        // return $request->input('query');
         $products = Product::where('name' , 'like' , '%'.$request->input('query'). '%')->select('name' , 'id')->get();
-        //return $products;
         return view('search')->with([
             'products' => $products , 
             'query' => $request->input('query')

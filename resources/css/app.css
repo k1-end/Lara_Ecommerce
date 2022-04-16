@@ -1,0 +1,10 @@
+@import "../../node_modules/@splidejs/splide/dist/css/splide.min.css";
+@import "../../node_modules/@splidejs/splide/dist/css/themes/splide-default.min.css";
+
+.splide__list img{
+    height : 500px;
+    max-width: 100%;
+}
+.is-active{
+    text-align: center;
+}

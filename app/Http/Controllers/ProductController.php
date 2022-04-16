@@ -17,10 +17,17 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::simplePaginate(15);
-        if (auth()->check() && auth()->user()->hasPermissionTo('EditProducts')) {
-            return view('dashboard.products')->with('products' , $products);
-        }
+        // if (auth()->check() && auth()->user()->hasPermissionTo('EditProducts')) {
+        //     return view('dashboard.products')->with('products' , $products);
+        // }
         return view('home')->with('products' , $products);
+    }
+
+    public function dashboard_index()
+    {
+        $products = Product::simplePaginate(15);
+        $this->authorize('viewAny' , Product::class);
+        return view('dashboard.products')->with('products' , $products);
     }
 
     /**

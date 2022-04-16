@@ -39,7 +39,7 @@ Route::post('/callback', [OrderController::class, 'callback'])->name('callback')
 
 Route::get('/dashboard/products/new' , [ProductController::class , 'create'])->middleware(App\Http\Middleware\OnlyAdmin::class)->name('new_product');
 Route::post('/dashboard/products/new' , [ProductController::class , 'store'])->middleware(App\Http\Middleware\OnlyAdmin::class);
-Route::get('/dashboard/products' , [ProductController::class , 'index'])->middleware(App\Http\Middleware\OnlyAdmin::class);
+Route::get('/dashboard/products' , [ProductController::class , 'dashboard_index'])->middleware(App\Http\Middleware\OnlyAdmin::class);
 Route::get('/dashboard/products/{product}' , [ProductController::class , 'show'])->middleware(App\Http\Middleware\OnlyAdmin::class);
 Route::get('/dashboard/products/edit/{product}' , [ProductController::class , 'edit'])->middleware(App\Http\Middleware\OnlyAdmin::class)->name('edit_product');
 Route::get('/dashboard/products/delete/{product}' , [ProductController::class , 'destroy'])->middleware(App\Http\Middleware\OnlyAdmin::class)->name('delete_product');

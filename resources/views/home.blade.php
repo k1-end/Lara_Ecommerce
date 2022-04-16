@@ -2,9 +2,6 @@
 
 @section('content')
 <section class="splide" aria-label="Splide Basic HTML Example">
-    <style>
-        
-    </style>
     <div class="splide__track">
         @php
             $slides = $products->random(4);
@@ -37,5 +34,9 @@
             // autoplay : true,
             // interval : 1000
         }).mount();
+      </script>
+      <script>
+          var navlinks = document.getElementsByClassName("nav-link");
+          console.log(navlinks);
       </script>
 @endsection

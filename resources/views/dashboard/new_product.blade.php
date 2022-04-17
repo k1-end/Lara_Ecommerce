@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.dashboard')
 
 @section('content')
     <form action="{{url('/dashboard/products/new')}}" method="post" enctype="multipart/form-data" >

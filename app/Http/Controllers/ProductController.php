@@ -77,6 +77,9 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
+        if (auth()->user()->hasRole('admin')) {
+            return view('dashboard.product')->with('product' , $product);
+        }
         return view('product')->with('product' , $product);
     }
 

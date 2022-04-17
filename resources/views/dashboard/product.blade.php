@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.dashboard')
 
 @section('content')
     <form action="{{url("product/edit/$product->id")}}" method="post">
@@ -25,5 +25,6 @@
             <label for="desc">Description</label>
         </div>
         <button class="w-100 btn btn-lg btn-primary" type="submit">Edit</button>
+        <a class="w-100 btn btn-lg btn-danger" href="{{route('delete_product',['product' => $product])}}">Delete Product</a>
     </form>
 @endsection

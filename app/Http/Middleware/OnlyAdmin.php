@@ -16,9 +16,8 @@ class OnlyAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        $roles = auth()->user()->getRoleNames();
 
-        if ($roles->contains('admin')) {
+        if (auth()->check() && auth()->user()->hasRole('admin')) {
             return $next($request);
         }else{
             return redirect()->route('home');

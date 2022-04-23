@@ -8,3 +8,7 @@
 .is-active{
     text-align: center;
 }
+
+form > * {
+    margin-top : 10px;
+}

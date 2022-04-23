@@ -21,7 +21,7 @@ $sum = 0;
         @endforeach
         Sum: {{$sum}}
     </ul>
-    <form action="/checkout" method="GET">
+    <form action="/checkout" method="GET" class=" w-25 m-auto">
         @csrf
         <h1 class="h3 mb-3 fw-normal">Shipping address</h1>
         <div class="form-floating">

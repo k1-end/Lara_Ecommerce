@@ -33,7 +33,9 @@ class OrderController extends Controller
                 'headers'=>[
                     'X-API-KEY' => '423316bf-4e39-4339-993d-6c217b9e9719',
                     'X-SANDBOX' => '1'
-                ]]);
+                ],
+                'verify' => false,
+            ]);
         } catch (ClientException $e) {
             return  Psr7\Message::toString($e->getRequest()) . Psr7\Message::toString($e->getResponse());
         }

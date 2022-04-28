@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Cart;
 use App\Models\User;
+use Image;
 
 class ProductController extends Controller
 {
@@ -56,7 +57,7 @@ class ProductController extends Controller
             'price' => ['required' ],
             'desc' => ['required' ],
             'name' => ['required' , 'unique:products'],
-            'thumbnail' => 'required|mimes:png,jpg,jpeg|max:2048'
+            'image' => ['required' , 'mimes:png,jpg,jpeg' , 'max:2048' , new \App\Rules\Image1000]
         ]);
         $product = new Product();
         $product->name = $request->name;
@@ -64,7 +65,12 @@ class ProductController extends Controller
         $product->price = $request->price;
         $product->brand = $request->brand;
         $product->category = $request->category;
-        $product->thumbnail = $request->file('thumbnail')->store('public/photos');
+        $image = Image::make($request->file('image'));
+        $image->heighten(1000);
+        $image->save();
+        $product->image = $request->file('image')->store('public/photos');
+        $image->resize(300 , 300)->save();
+        $product->thumbnail = $request->file('image')->store('public/photos/300');
         $product->save();
         return redirect('/dashboard/products');
     }
@@ -77,7 +83,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        if (auth()->check() && $this->authorize('viewAny' , Product::class)) {
+        if (auth()->check() && auth()->user()->can('viewAny' , Product::class)) {
             return view('dashboard.product')->with('product' , $product);
         }
         return view('product')->with('product' , $product);

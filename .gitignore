@@ -16,3 +16,4 @@ yarn-error.log
 .buildpath
 .project
 /.settings
+.test_data

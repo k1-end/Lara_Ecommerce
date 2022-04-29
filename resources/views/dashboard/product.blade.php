@@ -4,7 +4,7 @@
     <form class="w-50 m-auto" action="{{url("product/edit/$product->id")}}" method="post">
         @csrf
         <div class="text-center">
-            <img class="w-50" src="{{Storage::url($product->thumbnail)}}" alt="">
+            <img class="mw-100" src="{{Storage::url($product->image)}}" alt="">
         </div>
         <div class="form-floating">
             <input type="text" class="form-control"  name="name" id="name" value="{{$product->name}}">

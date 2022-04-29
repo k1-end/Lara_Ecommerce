@@ -26,7 +26,7 @@
         <div class="custom-file">
             <label class="custom-file-label" for="thumbnail">Thumbnail</label>
 
-            <input type="file" class="custom-file-input"  name="thumbnail" id="thumbnail" >
+            <input type="file" class="custom-file-input"  name="image" id="image" >
         </div>
         <button class="w-100 btn btn-lg btn-primary" type="submit">Create</button>
     </form>

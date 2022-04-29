@@ -8,7 +8,7 @@
         @endphp
           <ul class="splide__list">
               @foreach ($slides as $slide)
-              <li class="splide__slide"><a href="{{route('product',['product' => $slide])}}"><img src="{{Storage::url($slide->thumbnail)}}" alt="" ></a></li>
+              <li class="splide__slide"><a href="{{route('product',['product' => $slide])}}"><img src="{{Storage::url($slide->image)}}" alt="" ></a></li>
               @endforeach
           </ul>
     </div>
@@ -16,11 +16,13 @@
     @if($products)
         <ul class="d-flex flex-wrap" >
         @foreach($products as $p)
-            <li class="card p-1 mw-30" style="flex: 200px;">
-                <a href="{{route('product',['product' => $p])}}"><img src="{{Storage::url($p->thumbnail)}}" alt="" width="200"></a>
-                <a href="{{route('product',['product' => $p])}}">{{$p->name}}</a>
-                <p>{{$p->desc}}</p>
-                <p>{{$p->price}}</p>
+            <li class="card p-1 mw-30 m-1" style="flex: 200px;" >
+                <a href="{{route('product',['product' => $p])}}"><img src="{{Storage::url($p->thumbnail)}}" alt="" class="img-fluid rounded"></a>
+                <div class="card-body">
+                <a class="card-title text-decoration-none link-dark fw-bolder" href="{{route('product',['product' => $p])}}">{{$p->name}}</a>
+                <p class="card-text text-truncate" >{{$p->desc}}</p>
+                <span class="fw-bolder badge bg-info text-dark">{{$p->price}}</span>
+                </div>
             </li>
         @endforeach
         </ul>
@@ -34,9 +36,5 @@
             // autoplay : true,
             // interval : 1000
         }).mount();
-      </script>
-      <script>
-          var navlinks = document.getElementsByClassName("nav-link");
-          console.log(navlinks);
       </script>
 @endsection

@@ -37,20 +37,18 @@ Route::get('/dummy_payment' , [OrderController::class , 'dummy_payment'])->name(
 Route::get('/successful_payment' , [OrderController::class , 'successful_payment'])->name('successful_payment');
 Route::post('/callback', [OrderController::class, 'callback'])->name('callback');
 
-Route::get('/dashboard/products/new' , [ProductController::class , 'create'])->middleware(App\Http\Middleware\OnlyAdmin::class)->name('new_product');
-Route::post('/dashboard/products/new' , [ProductController::class , 'store'])->middleware(App\Http\Middleware\OnlyAdmin::class);
-Route::get('/dashboard/products' , [ProductController::class , 'dashboard_index'])->middleware(App\Http\Middleware\OnlyAdmin::class);
-Route::get('/dashboard/products/{product}' , [ProductController::class , 'show'])->middleware(App\Http\Middleware\OnlyAdmin::class);
-Route::get('/dashboard/products/edit/{product}' , [ProductController::class , 'edit'])->middleware(App\Http\Middleware\OnlyAdmin::class)->name('edit_product');
-Route::get('/dashboard/products/delete/{product}' , [ProductController::class , 'destroy'])->middleware(App\Http\Middleware\OnlyAdmin::class)->name('delete_product');
-Route::post('/product/edit/{product}' , [ProductController::class , 'update'])->middleware(App\Http\Middleware\OnlyAdmin::class);
-
-
-
-Route::get('/dashboard' , [DashboardController::class , 'index'])->middleware(App\Http\Middleware\OnlyAdmin::class);
-Route::get('/dashboard/users' , [UserController::class , 'index'])->middleware(App\Http\Middleware\OnlyAdmin::class);
-Route::get('/dashboard/{user}' , [UserController::class , 'show'])->middleware(App\Http\Middleware\OnlyAdmin::class);
-
+Route::middleware([App\Http\Middleware\OnlyAdmin::class])->group(function () {
+    Route::get('/dashboard/products/new' , [ProductController::class , 'create'])->name('new_product');
+    Route::post('/dashboard/products/new' , [ProductController::class , 'store']);
+    Route::get('/dashboard/products' , [ProductController::class , 'dashboard_index']);
+    Route::get('/dashboard/products/{product}' , [ProductController::class , 'show']);
+    Route::get('/dashboard/products/edit/{product}' , [ProductController::class , 'edit']);
+    Route::get('/dashboard/products/delete/{product}' , [ProductController::class , 'destroy'])->name('delete_product');
+    Route::post('/product/edit/{product}' , [ProductController::class , 'update']);
+    Route::get('/dashboard' , [DashboardController::class , 'index'])->middleware(App\Http\Middleware\OnlyAdmin::class);
+    Route::get('/dashboard/users' , [UserController::class , 'index']);
+    Route::get('/dashboard/{user}' , [UserController::class , 'show']);
+});
 
 Route::get('search/' , [ProductController::class , 'search'])->name('search');
 

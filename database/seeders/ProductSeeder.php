@@ -18,22 +18,13 @@ class ProductSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\Product::factory(50)->state(new Sequence(
-        //     ['brand'=>'Sam'],
-        //     ['brand'=>'LG'],
-        //     ['brand'=>'Life'],
-        //     ['brand'=>'Leno'],
-        //     ['brand'=>'TCO'],
-        //     ))
-        //     ->state(new Sequence(
-        //     ['category'=>'Phone'],
-        //     ['category'=>'Laptop'],
-        //     ['category'=>'PC'],
-        //     ['category'=>'Accessory'],
-        //     ['category'=>'Software'],
-        //     ))
-        //     ->create(); 
-        $products = json_decode(file_get_contents('/home/keyvan/Pictures/Test Date/p.json'));
+        // echo dirname(__DIR__);
+        // die;
+        $test_data_dir = __DIR__ ."/.test_data/"; 
+        $products = json_decode(file_get_contents($test_data_dir . 'p.json'));
+
+        $counter = 0;
+        echo "Total images found: " . count($products) . PHP_EOL;
         foreach ($products as $p ) {
             if (filesize($p->thumbnail) > 1024 * 1024 ) {
                 continue;
@@ -44,20 +35,23 @@ class ProductSeeder extends Seeder
             $product->brand = $p->brand;
             $product->price = $p->price;
             $product->category = $p->category;
-            //$product->thumbnail = $p->thumbnail;
-            $img = Image::make($p->thumbnail);
-            if ($img->width() > 1000) {
-                $img->widen(1000);
-                $img->save();
+            $image = Image::make($p->thumbnail);
+            if ($image->height() >= 1000 && $image->width() >= 1000) {
+                $image->heighten(1000);
+                //$image->crop(800 , 800);
+            }elseif ($image->height() < 1000 || $image->width() == 1000) {
+                continue;
             }
-            //echo $img->filesize() . PHP_EOL;
 
-            // echo $p->thumbnail . PHP_EOL;
+            // echo $request->file('thumbnail')->store('public/photos') .PHP_EOL;
 
-           
-            $path = Storage::putFile('public/photos', new File($p->thumbnail) );
-            $product->thumbnail = $path;
+            $image->save($test_data_dir . '1000/img.jpg');
+            $product->image = Storage::putFile('public/photos', new File($image->basePath()) );
+            $image->resize(300 , 300)->save($test_data_dir . '300/img.jpg');
+            $product->thumbnail = Storage::putFile('public/photos/300', new File($image->basePath()) );
+            
             $product->save();
+            echo $counter++ . PHP_EOL;
         }
     }
 }
